@@ -1,19 +1,17 @@
 package br.edu.fafic.ppi.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@SuperBuilder(toBuilder = true)
 @Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor
 public abstract class Owner {
 
     @Id
@@ -21,10 +19,10 @@ public abstract class Owner {
     private Long id;
 
     private String name;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Contact contact;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Vehicle> vehicles;
 }

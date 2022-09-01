@@ -20,7 +20,9 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
 
     @Override
     public void saveOrUpdate(T entity) {
-        getEntityManager().getTransaction().begin();
+        if(!getEntityManager().getTransaction().isActive()){
+            getEntityManager().getTransaction().begin();
+        }
         getEntityManager().merge(entity);
         getEntityManager().getTransaction().commit();
     }
@@ -49,9 +51,12 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
     @Override
     public void saveList(List<T> entities) {
          entities.forEach( e -> {
-            getEntityManager().getTransaction().begin();
+             if(!getEntityManager().getTransaction().isActive()){
+                 getEntityManager().getTransaction().begin();
+             }
             getEntityManager().merge(e);
             getEntityManager().getTransaction().commit();
+
         });
 
     }

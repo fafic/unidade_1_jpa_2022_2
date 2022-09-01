@@ -9,5 +9,8 @@
         <module name="concessionaria" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="concessionaria" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

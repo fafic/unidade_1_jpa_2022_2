@@ -1,9 +1,6 @@
 package br.edu.fafic.ppi.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,9 +20,12 @@ public class Vehicle {
     private String model;
     private Double value;
     private Integer year;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @ToString.Exclude
     private Owner owner;
 
     @ManyToMany
     private List<Accessory> accesories;
+
+
 }

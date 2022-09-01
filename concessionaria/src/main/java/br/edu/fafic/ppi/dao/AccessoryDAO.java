@@ -8,7 +8,7 @@ public class AccessoryDAO extends GenericDAOImpl<Accessory> {
 
     @Override
     public void saveOrUpdate(Accessory entity) {
-        saveOrUpdate(entity);
+        super.saveOrUpdate(entity);
     }
 
     @Override
